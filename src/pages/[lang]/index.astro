@@ -1,0 +1,70 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { languages, defaultLang, useTranslations } from '../../i18n';
+
+const langParam = Astro.params.lang;
+const lang = langParam in languages ? langParam : defaultLang;
+const t = useTranslations(lang);
+---
+
+<Layout title={t('nav.home')}>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>{t('hero.title')}</h1>
+        <h2 class="hero-subtitle">{t('hero.subtitle')}</h2>
+        <p class="hero-description">{t('hero.description')}</p>
+        <div class="hero-cta">
+          <a href={`/${lang}/contact`} class="btn btn-primary">{t('hero.cta')}</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="image-placeholder">
+          <span>Hero Image Placeholder</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="container">
+      <div class="intro-content">
+        <h2>{t('about.title')}</h2>
+        <p>{t('about.description')}</p>
+      </div>
+      <div class="intro-image">
+        <div class="image-placeholder">
+          <span>Company Image Placeholder</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="currencies">
+    <div class="container">
+      <h2>{t('services.title')}</h2>
+      <div class="currency-grid">
+        <div class="currency-card">
+          <div class="currency-icon">LYD</div>
+          <h3>Libyan Dinar</h3>
+          <p>Local currency exchange</p>
+        </div>
+        <div class="currency-card">
+          <div class="currency-icon">USD</div>
+          <h3>US Dollar</h3>
+          <p>American currency</p>
+        </div>
+        <div class="currency-card">
+          <div class="currency-icon">EUR</div>
+          <h3>Euro</h3>
+          <p>European currency</p>
+        </div>
+        <div class="currency-card">
+          <div class="currency-icon">+</div>
+          <h3>Many More</h3>
+          <p>Multiple currencies available</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

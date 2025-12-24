@@ -1,5 +1,7 @@
 ---
+import '../styles/global.css';
 import { getLangFromUrl, useTranslations } from '../i18n';
+import contact from '../data/contact';
 
 interface Props {
   title: string;
@@ -58,8 +60,8 @@ const currentPath = Astro.url.pathname.replace(`/${lang}`, '');
           </div>
           <div class="footer-contact">
             <h4>{t('contact.title')}</h4>
-            <p>{t('contact.email')}: info@diwancash.ly</p>
-            <p>{t('contact.phone')}: +218919595353</p>
+            <p>{t('contact.email')}: {contact.email}</p>
+            <p>{t('contact.phone')}: {contact.phone}</p>
             <p>{t('contact.location.value')}</p>
           </div>
         </div>

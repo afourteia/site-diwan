@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { languages, defaultLang, useTranslations } from '../../i18n';
+
+const langParam = Astro.params.lang;
+const lang = langParam in languages ? langParam : defaultLang;
+const t = useTranslations(lang);
+---
+
+<Layout title={t('services.title')}>
+  <section class="services">
+    <div class="container">
+      <h1>{t('services.title')}</h1>
+      <p>{t('services.description')}</p>
+
+      <h2>{t('services.exchange.title')}</h2>
+      <p>{t('services.exchange.description')}</p>
+
+      <h2>{t('services.business.title')}</h2>
+      <p>{t('services.business.description')}</p>
+
+      <h2>{t('services.consultation.title')}</h2>
+      <p>{t('services.consultation.description')}</p>
+    </div>
+  </section>
+</Layout>

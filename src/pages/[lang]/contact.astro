@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { languages, defaultLang, useTranslations } from '../../i18n';
+import contact from '../../data/contact';
+
+const langParam = Astro.params.lang;
+const lang = langParam in languages ? langParam : defaultLang;
+const t = useTranslations(lang);
+---
+
+<Layout title={t('contact.title')}>
+  <section class="contact">
+    <div class="container">
+      <h1>{t('contact.title')}</h1>
+      <p>{t('contact.description')}</p>
+
+      <div class="contact-details">
+        <p>{t('contact.email')}: <a href={`mailto:${contact.email}`}>{contact.email}</a></p>
+        <p>{t('contact.phone')}: <a href={`tel:${contact.phone}`}>{contact.phone}</a></p>
+        <p>{t('contact.location.value')}</p>
+      </div>
+    </div>
+  </section>
+</Layout>
