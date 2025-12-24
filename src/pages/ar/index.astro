@@ -1,0 +1,242 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations } from '../../i18n';
+
+const lang = 'ar';
+const t = useTranslations(lang);
+---
+
+<Layout title={t('nav.home')}>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>{t('hero.title')}</h1>
+        <h2 class="hero-subtitle">{t('hero.subtitle')}</h2>
+        <p class="hero-description">{t('hero.description')}</p>
+        <div class="hero-cta">
+          <a href="/ar/contact" class="btn btn-primary">{t('hero.cta')}</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <!-- Placeholder for hero image -->
+        <div class="image-placeholder">
+          <span>صورة البانر</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="container">
+      <div class="intro-content">
+        <h2>مرحباً بكم في مجموعة الديوان</h2>
+        <p>
+          تقع في قلب مصراتة، ليبيا، مجموعة الديوان للصرافة هي شريكك الموثوق لجميع احتياجات 
+          صرف العملات. نحن متخصصون في تقديم خدمات صرف العملات السريعة والآمنة والموثوقة.
+        </p>
+      </div>
+      <div class="intro-image">
+        <!-- Placeholder for intro image -->
+        <div class="image-placeholder">
+          <span>صورة الشركة</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="currencies">
+    <div class="container">
+      <h2>العملات التي نتعامل بها</h2>
+      <div class="currency-grid">
+        <div class="currency-card">
+          <div class="currency-icon">LYD</div>
+          <h3>الدينار الليبي</h3>
+          <p>صرف العملة المحلية</p>
+        </div>
+        <div class="currency-card">
+          <div class="currency-icon">USD</div>
+          <h3>الدولار الأمريكي</h3>
+          <p>العملة الأمريكية</p>
+        </div>
+        <div class="currency-card">
+          <div class="currency-icon">EUR</div>
+          <h3>اليورو</h3>
+          <p>العملة الأوروبية</p>
+        </div>
+        <div class="currency-card">
+          <div class="currency-icon">+</div>
+          <h3>المزيد</h3>
+          <p>عملات متعددة متاحة</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #1e40af 0%, #059669 100%);
+    color: white;
+  }
+
+  .hero .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+
+  .hero-description {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .btn-primary {
+    background-color: white;
+    color: #1e40af;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .image-placeholder {
+    aspect-ratio: 16/9;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.125rem;
+  }
+
+  .intro {
+    padding: 4rem 0;
+  }
+
+  .intro .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .intro-content h2 {
+    font-size: 2rem;
+    color: #1e40af;
+    margin-bottom: 1rem;
+  }
+
+  .intro-content p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #4b5563;
+  }
+
+  .intro .image-placeholder {
+    background: #f3f4f6;
+    border-color: #e5e7eb;
+    color: #9ca3af;
+  }
+
+  .currencies {
+    padding: 4rem 0;
+    background-color: #f9fafb;
+  }
+
+  .currencies h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #1e40af;
+  }
+
+  .currency-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .currency-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .currency-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .currency-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #1e40af 0%, #059669 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 1rem;
+  }
+
+  .currency-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #1f2937;
+  }
+
+  .currency-card p {
+    color: #6b7280;
+  }
+
+  @media (max-width: 768px) {
+    .hero .container,
+    .intro .container {
+      grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+    }
+
+    .currency-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

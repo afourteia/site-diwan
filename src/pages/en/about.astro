@@ -1,0 +1,226 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations } from '../../i18n';
+
+const lang = 'en';
+const t = useTranslations(lang);
+---
+
+<Layout title={t('nav.about')}>
+  <section class="page-header">
+    <div class="container">
+      <h1>{t('about.title')}</h1>
+    </div>
+  </section>
+
+  <section class="about-content">
+    <div class="container">
+      <div class="about-intro">
+        <p class="lead">{t('about.description')}</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="card-icon">🎯</div>
+          <h3>{t('about.mission')}</h3>
+          <p>{t('about.mission.text')}</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">👁️</div>
+          <h3>{t('about.vision')}</h3>
+          <p>{t('about.vision.text')}</p>
+        </div>
+      </div>
+
+      <div class="about-details">
+        <div class="detail-section">
+          <h2>Our Commitment</h2>
+          <p>
+            At Diwan Group Currency Exchange, we are committed to providing our clients with:
+          </p>
+          <ul>
+            <li>Competitive exchange rates</li>
+            <li>Fast and efficient service</li>
+            <li>Secure and reliable transactions</li>
+            <li>Professional and courteous staff</li>
+            <li>Transparent pricing with no hidden fees</li>
+          </ul>
+        </div>
+
+        <div class="detail-image">
+          <div class="image-placeholder">
+            <span>Office Image Placeholder</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="location-info">
+        <h2>Visit Us</h2>
+        <div class="location-card">
+          <h3>Misurata, Libya</h3>
+          <p>We are conveniently located in Misurata, serving clients throughout Libya with dedication and professionalism.</p>
+          <div class="image-placeholder">
+            <span>Location Map Placeholder</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    background: linear-gradient(135deg, #1e40af 0%, #059669 100%);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+
+  .about-content {
+    padding: 4rem 0;
+  }
+
+  .about-intro {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    text-align: center;
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #4b5563;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .about-card {
+    background: #f9fafb;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+  }
+
+  .card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-card h3 {
+    font-size: 1.5rem;
+    color: #1e40af;
+    margin-bottom: 1rem;
+  }
+
+  .about-card p {
+    color: #4b5563;
+    line-height: 1.6;
+  }
+
+  .about-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin: 4rem 0;
+    align-items: center;
+  }
+
+  .detail-section h2 {
+    font-size: 2rem;
+    color: #1e40af;
+    margin-bottom: 1rem;
+  }
+
+  .detail-section p {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin-bottom: 1rem;
+  }
+
+  .detail-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .detail-section li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #4b5563;
+  }
+
+  .detail-section li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #059669;
+    font-weight: bold;
+  }
+
+  .image-placeholder {
+    aspect-ratio: 16/9;
+    background: #f3f4f6;
+    border: 2px dashed #e5e7eb;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-size: 1.125rem;
+  }
+
+  .location-info {
+    margin-top: 4rem;
+  }
+
+  .location-info h2 {
+    font-size: 2rem;
+    color: #1e40af;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .location-card {
+    background: #f9fafb;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .location-card h3 {
+    font-size: 1.5rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+  }
+
+  .location-card p {
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2rem;
+    }
+
+    .about-details {
+      grid-template-columns: 1fr;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,23 @@
+{
+  "name": "site-diwan",
+  "version": "1.0.0",
+  "description": "Diwan Group Currency Exchange Website",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "keywords": ["astro", "currency-exchange", "diwan"],
+  "author": "Diwan Group",
+  "license": "ISC",
+  "dependencies": {
+    "astro": "^5.16.6"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.6.3"
+  }
+}
