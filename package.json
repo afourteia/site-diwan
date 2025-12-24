@@ -10,10 +10,15 @@
     "preview": "astro preview",
     "astro": "astro"
   },
-  "keywords": ["astro", "currency-exchange", "diwan"],
+  "keywords": [
+    "astro",
+    "currency-exchange",
+    "diwan"
+  ],
   "author": "Diwan Group",
   "license": "ISC",
   "dependencies": {
+    "@astrojs/ts-plugin": "^1.10.6",
     "astro": "^5.16.6"
   },
   "devDependencies": {
