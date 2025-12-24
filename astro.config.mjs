@@ -5,16 +5,16 @@ import tailwind from '@tailwindcss/vite';
 export default defineConfig({
   output: 'static',
   build: {
-    format: 'directory'
+    format: 'directory',
   },
   vite: {
-    plugins: [tailwind()]
+    plugins: [tailwind()],
   },
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'ar'],
     routing: {
-      prefixDefaultLocale: true
-    }
-  }
+      prefixDefaultLocale: true,
+    },
+  },
 });
