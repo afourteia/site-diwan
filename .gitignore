@@ -28,3 +28,4 @@ vscode/
 
 
 .astro/
+.astro/types.d.ts
