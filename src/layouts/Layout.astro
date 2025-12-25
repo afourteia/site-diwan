@@ -38,13 +38,20 @@ const pageDescription = description || t('hero.subtitle');
               <!-- <p class="brand-subline">{t('home.values.title')}</p> -->
             </div>
           </a>
-          <nav class="site-nav" aria-label="Primary">
+          <nav id="primary-navigation" class="site-nav" aria-label="Primary">
             <a class="nav-link" href={`/${lang}/`}>{t('nav.home')}</a>
             <a class="nav-link" href={`/${lang}/about`}>{t('nav.about')}</a>
             <a class="nav-link" href={`/${lang}/services`}>{t('nav.services')}</a>
             <a class="nav-link" href={`/${lang}/contact`}>{t('nav.contact')}</a>
           </nav>
           <div class="header-actions">
+            <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true">
+                <path d="M3 6h18"></path>
+                <path d="M3 12h18"></path>
+                <path d="M3 18h18"></path>
+              </svg>
+            </button>
             <a class="btn btn-primary" href={`/${lang}/contact`}>{t('nav.contact')}</a>
             <a class="lang-switch" href={`/${otherLang}${currentPath}`}>{otherLangLabel}</a>
           </div>
@@ -80,6 +87,17 @@ const pageDescription = description || t('hero.subtitle');
         </div>
       </footer>
     </div>
+    <script>
+      (function () {
+        const btn = document.querySelector('.menu-toggle');
+        const nav = document.getElementById('primary-navigation');
+        if (!btn || !nav) return;
+        btn.addEventListener('click', function () {
+          const open = nav.classList.toggle('mobile-open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      })();
+    </script>
   </body>
 </html>
 

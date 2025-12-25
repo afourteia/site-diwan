@@ -400,6 +400,66 @@ main {
   gap: 1.75rem;
 }
 
+/* Mobile hamburger menu */
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 8px;
+  color: var(--text-dark);
+}
+
+.menu-toggle:focus-visible {
+  outline: 2px solid var(--brand-dark);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .site-nav {
+    display: none;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  /* When menu is opened, display nav as a stacked panel */
+  .site-nav.mobile-open {
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: var(--surface);
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    z-index: 9;
+  }
+
+  .site-nav.mobile-open .nav-link {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.04);
+  }
+
+  .header-grid {
+    grid-template-columns: auto 1fr auto;
+  }
+}
+
 .contact-card h3 {
   font-size: 1.4rem;
   margin-bottom: 1rem;
