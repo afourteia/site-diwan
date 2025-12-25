@@ -2,25 +2,37 @@
 import Layout from '../../layouts/Layout.astro';
 import { languages, defaultLang, useTranslations } from '../../i18n';
 
-const langParam = Astro.params.lang;
-const lang = langParam in languages ? langParam : defaultLang;
+type Locale = keyof typeof languages;
+const langParam = Astro.params.lang as Locale | undefined;
+const lang = langParam && langParam in languages ? langParam : defaultLang;
 const t = useTranslations(lang);
+const serviceCards = [
+  { title: t('services.exchange.title'), copy: t('services.exchange.description') },
+  { title: t('services.business.title'), copy: t('services.business.description') },
+  { title: t('services.consultation.title'), copy: t('services.consultation.description') }
+];
+export const getStaticPaths = () =>
+  (Object.keys(languages) as Locale[]).map((locale) => ({ params: { lang: locale } }));
 ---
 
-<Layout title={t('services.title')}>
-  <section class="services">
-    <div class="container">
+<Layout title={t('services.title')} description={t('services.description')}>
+  <section class="section-surface">
+    <div class="section-heading">
       <h1>{t('services.title')}</h1>
       <p>{t('services.description')}</p>
-
-      <h2>{t('services.exchange.title')}</h2>
-      <p>{t('services.exchange.description')}</p>
-
-      <h2>{t('services.business.title')}</h2>
-      <p>{t('services.business.description')}</p>
-
-      <h2>{t('services.consultation.title')}</h2>
-      <p>{t('services.consultation.description')}</p>
+    </div>
+    <div class="section-heading">
+      <p>
+        {t('home.values.detail')}
+      </p>
+    </div>
+    <div class="service-grid">
+      {serviceCards.map((card) => (
+        <article class="service-card">
+          <h3>{card.title}</h3>
+          <p>{card.copy}</p>
+        </article>
+      ))}
     </div>
   </section>
 </Layout>

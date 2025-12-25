@@ -1,68 +1,113 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { languages, defaultLang, useTranslations } from '../../i18n';
+import contact from '../../data/contact';
 
-const langParam = Astro.params.lang;
-const lang = langParam in languages ? langParam : defaultLang;
+type Locale = keyof typeof languages;
+const langParam = Astro.params.lang as Locale | undefined;
+const lang = langParam && langParam in languages ? langParam : defaultLang;
+export const getStaticPaths = () =>
+  (Object.keys(languages) as Locale[]).map((locale) => ({ params: { lang: locale } }));
 const t = useTranslations(lang);
+const heroImage = new URL('../../assets/images/Currencies.jpg', import.meta.url).href;
+const serviceCards = [
+  { title: t('services.exchange.title'), copy: t('services.exchange.description') },
+  { title: t('services.business.title'), copy: t('services.business.description') },
+  { title: t('services.consultation.title'), copy: t('services.consultation.description') }
+];
+const trustHighlights = [
+  t('home.trust.detail1'),
+  t('home.trust.detail2'),
+  t('home.trust.detail3')
+];
 ---
 
-<Layout title={t('nav.home')}>
-  <section class="hero">
-    <div class="container">
+<Layout title={t('nav.home')} description={t('hero.description')}>
+  <section class="hero" id="home">
+    <div class="container hero-grid">
       <div class="hero-content">
+        <p class="hero-subtitle">{t('home.values.title')}</p>
         <h1>{t('hero.title')}</h1>
-        <h2 class="hero-subtitle">{t('hero.subtitle')}</h2>
         <p class="hero-description">{t('hero.description')}</p>
+        <p class="hero-highlight">{t('home.values.detail')}</p>
         <div class="hero-cta">
-          <a href={`/${lang}/contact`} class="btn btn-primary">{t('hero.cta')}</a>
+          <a class="btn btn-primary" href={`/${lang}/contact`}>{t('hero.cta')}</a>
+          <a class="btn btn-ghost" href={`/${lang}/about`}>{t('about.title')}</a>
         </div>
       </div>
-      <div class="hero-image">
-        <div class="image-placeholder">
-          <span>Hero Image Placeholder</span>
+      <div class="hero-media">
+        <div class="hero-media-card">
+          <img src={heroImage} alt={t('hero.title')} loading="lazy" />
         </div>
+        <div class="hero-highlight">{t('contact.location.value')}</div>
       </div>
     </div>
   </section>
 
-  <section class="intro">
-    <div class="container">
-      <div class="intro-content">
-        <h2>{t('about.title')}</h2>
-        <p>{t('about.description')}</p>
-      </div>
-      <div class="intro-image">
-        <div class="image-placeholder">
-          <span>Company Image Placeholder</span>
-        </div>
-      </div>
+  <section class="section-surface" id="about">
+    <div class="section-heading">
+      <h2>{t('about.title')}</h2>
+      <p>{t('about.description')}</p>
+    </div>
+    <div class="values-grid">
+      <article>
+        <h3>{t('about.mission')}</h3>
+        <p>{t('about.mission.text')}</p>
+      </article>
+      <article>
+        <h3>{t('about.vision')}</h3>
+        <p>{t('about.vision.text')}</p>
+      </article>
+      <article>
+        <h3>{t('home.trust.title')}</h3>
+        <ul>
+          {trustHighlights.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </article>
     </div>
   </section>
 
-  <section class="currencies">
-    <div class="container">
+  <section class="section-surface" id="services">
+    <div class="section-heading">
       <h2>{t('services.title')}</h2>
-      <div class="currency-grid">
-        <div class="currency-card">
-          <div class="currency-icon">LYD</div>
-          <h3>Libyan Dinar</h3>
-          <p>Local currency exchange</p>
+      <p>{t('services.description')}</p>
+    </div>
+    <div class="service-grid">
+      {serviceCards.map((card) => (
+        <article class="service-card">
+          <h3>{card.title}</h3>
+          <p>{card.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="contact-panel" id="contact">
+    <div class="container">
+      <div class="contact-card">
+        <div>
+          <h3>{t('contact.title')}</h3>
+          <p>{t('contact.description')}</p>
         </div>
-        <div class="currency-card">
-          <div class="currency-icon">USD</div>
-          <h3>US Dollar</h3>
-          <p>American currency</p>
+        <div>
+          <p class="contact-detail">
+            <strong>{t('contact.email')}:</strong>
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          </p>
+          <p class="contact-detail">
+            <strong>{t('contact.phone')}:</strong>
+            <a href={`tel:${contact.phone}`}>{contact.phone}</a>
+          </p>
+          <p class="contact-detail">
+            <strong>{t('contact.location')}:</strong> {t('contact.location.value')}
+          </p>
+          <p class="contact-detail">{contact.site}</p>
         </div>
-        <div class="currency-card">
-          <div class="currency-icon">EUR</div>
-          <h3>Euro</h3>
-          <p>European currency</p>
-        </div>
-        <div class="currency-card">
-          <div class="currency-icon">+</div>
-          <h3>Many More</h3>
-          <p>Multiple currencies available</p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href={`mailto:${contact.email}`}>{t('contact.cta')}</a>
+          <a class="btn btn-ghost" href={`tel:${contact.phone}`}>{contact.phone}</a>
         </div>
       </div>
     </div>

@@ -3,21 +3,56 @@ import Layout from '../../layouts/Layout.astro';
 import { languages, defaultLang, useTranslations } from '../../i18n';
 import contact from '../../data/contact';
 
-const langParam = Astro.params.lang;
-const lang = langParam in languages ? langParam : defaultLang;
+type Locale = keyof typeof languages;
+const langParam = Astro.params.lang as Locale | undefined;
+const lang = langParam && langParam in languages ? langParam : defaultLang;
 const t = useTranslations(lang);
+const contactDetails = [
+  {
+    label: t('contact.email'),
+    value: contact.email,
+    href: `mailto:${contact.email}`
+  },
+  {
+    label: t('contact.phone'),
+    value: contact.phone,
+    href: `tel:${contact.phone}`,
+    ltr: true
+  },
+  {
+    label: t('contact.location'),
+    value: t('contact.location.value')
+  }
+];
+export const getStaticPaths = () =>
+  (Object.keys(languages) as Locale[]).map((locale) => ({ params: { lang: locale } }));
 ---
 
-<Layout title={t('contact.title')}>
-  <section class="contact">
+<Layout title={t('contact.title')} description={t('contact.description')}>
+  <section class="contact-panel">
     <div class="container">
-      <h1>{t('contact.title')}</h1>
-      <p>{t('contact.description')}</p>
-
-      <div class="contact-details">
-        <p>{t('contact.email')}: <a href={`mailto:${contact.email}`}>{contact.email}</a></p>
-        <p>{t('contact.phone')}: <a href={`tel:${contact.phone}`}>{contact.phone}</a></p>
-        <p>{t('contact.location.value')}</p>
+      <div class="contact-card">
+        <div>
+          <h1>{t('contact.title')}</h1>
+          <p>{t('contact.description')}</p>
+        </div>
+        <div>
+          {contactDetails.map((detail) => (
+            <p class="contact-detail">
+              <strong>{detail.label}:</strong>
+              {detail.href ? (
+                <a class={detail.ltr ? 'ltr-text' : ''} href={detail.href}>{detail.value}</a>
+              ) : (
+                <span>{detail.value}</span>
+              )}
+            </p>
+          ))}
+          <p class="contact-detail">{contact.site}</p>
+        </div>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href={`mailto:${contact.email}`}>{t('contact.cta')}</a>
+          <a class="btn btn-ghost" href={`tel:${contact.phone}`}>{contact.phone}</a>
+        </div>
       </div>
     </div>
   </section>
