@@ -11,9 +11,12 @@ export default defineConfig({
   // - Subpath deployment: 'https://example.com/subpath' (also set `base` below)
   site: 'https://diwancash.ly',
 
-  // `base` is the subpath where the site will be served. Use '/' for root,
-  // or '/subpath/' when hosting under a subfolder.
-  base: '/',
+  // `base` is the path prefix used for built assets and links.
+  // - For normal HTTP hosting at root use: '/' (default)
+  // - To support opening `dist/index.html` directly via file:// use: '' (empty string)
+  // - For hosting under a subfolder use: '/subpath/'
+  // Setting to empty string instructs Astro to emit relative URLs where possible.
+  base: '',
 
   output: 'static',
 
