@@ -1,4 +1,39 @@
----
-// Redirect root to default language (English)
-return Astro.redirect('/en/');
----
+<!-- Redirect root based on browser language. Default: Arabic (`/ar/`). -->
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="robots" content="noindex" />
+		<link rel="canonical" href="/ar/" />
+		<title>Redirecting…</title>
+		<script>
+			(function () {
+				const defaultLang = 'ar';
+				const supported = ['ar', 'en'];
+				const raw = navigator.languages || [navigator.language || ''];
+				function pick(list: string[]): string {
+					for (const l of list) {
+						if (!l) continue;
+						const code = l.split('-')[0].toLowerCase();
+						if (supported.includes(code)) return code;
+					}
+					return defaultLang;
+				}
+				try {
+					const lang = pick(raw as string[]);
+					const target = '/' + lang + '/';
+					if (location.pathname !== target) location.replace(target);
+				} catch (e) {
+					location.replace('/' + defaultLang + '/');
+				}
+			})();
+		</script>
+		<noscript>
+			<meta http-equiv="refresh" content="0;url=/ar/" />
+		</noscript>
+	</head>
+	<body>
+		<p><a href="/ar/">Redirecting to /ar/</a></p>
+	</body>
+</html>
+ 
