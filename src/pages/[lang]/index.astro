@@ -99,7 +99,7 @@ const trustHighlights = [
           </p>
           <p class="contact-detail">
             <strong>{t('contact.phone')}:</strong>
-            <a href={`tel:${contact.phone}`}>{contact.phone}</a>
+            <a dir="ltr" href={`tel:${contact.phone}`}>{contact.phone}</a>
           </p>
           <p class="contact-detail">
             <strong>{t('contact.location')}:</strong> {t('contact.location.value')}
@@ -108,7 +108,7 @@ const trustHighlights = [
         </div>
         <div class="contact-actions">
           <a class="btn btn-primary" href={`mailto:${contact.email}`}>{t('contact.cta')}</a>
-          <a class="btn btn-ghost" href={`tel:${contact.phone}`}>{contact.phone}</a>
+          <a dir="ltr" class="btn btn-ghost" href={`tel:${contact.phone}`}>{contact.phone}</a>
         </div>
       </div>
     </div>
