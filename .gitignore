@@ -19,7 +19,7 @@ pnpm-debug.log*
 .DS_Store
 
 # IDE
-.vscode/
+vscode/
 .idea/
 *.swp
 *.swo
