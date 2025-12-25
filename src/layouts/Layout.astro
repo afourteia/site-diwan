@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+import { getLangFromUrl, useTranslations, languages } from '../i18n';
+import contact from '../data/contact';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const isRTL = lang === 'ar';
+const otherLang = lang === 'en' ? 'ar' : 'en';
+const otherLangLabel = languages[otherLang];
+const currentPath = Astro.url.pathname.replace(`/${lang}`, '') || '/';
+const currentPathRelative = currentPath.replace(/^\//, '');
+// Base for client-side resolution: prefer a relative base for file://; use configured BASE_URL otherwise
+const pageDescription = description || t('hero.subtitle');
+---
+<!DOCTYPE html>
+<html lang={lang} dir={isRTL ? 'rtl' : 'ltr'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={pageDescription} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} - {t('hero.title')}</title>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="container header-grid">
+          <a class="brand-mark" >
+            <img src="/favicon.png" class="logo-mark" alt={t('hero.title')} />
+            <div>
+              <p class="brand-label">{t('hero.title')}</p>
+              <!-- <p class="brand-subline">{t('home.values.title')}</p> -->
+            </div>
+          </a>
+          <nav id="primary-navigation" class="site-nav" aria-label="Primary">
+            <a class="nav-link" href={`/${lang}/`}>{t('nav.home')}</a>
+            <a class="nav-link" href={`/${lang}/about`}>{t('nav.about')}</a>
+            <a class="nav-link" href={`/${lang}/services`}>{t('nav.services')}</a>
+            <a class="nav-link" href={`/${lang}/contact`}>{t('nav.contact')}</a>
+          </nav>
+          <div class="header-actions">
+            <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true">
+                <path d="M3 6h18"></path>
+                <path d="M3 12h18"></path>
+                <path d="M3 18h18"></path>
+              </svg>
+            </button>
+            <!-- <a class="btn btn-primary" href={`/${lang}/contact`}>{t('nav.contact')}</a> -->
+            <a class="lang-switch" href={currentPath === '/' ? `/${otherLang}/` : `/${otherLang}/${currentPathRelative}`}>{otherLangLabel}</a>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer class="site-footer">
+        <div class="container footer-grid">
+          <div>
+            <p class="footer-brand">{t('hero.title')}</p>
+            <p class="footer-company">{t('footer.company')}</p>
+            <p class="footer-site">{contact.site}</p>
+          </div>
+          <div class="footer-contact">
+            <p class="footer-heading">{t('contact.title')}</p>
+            <p>
+              {t('contact.email')}: 
+              <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            </p>
+            <p>
+              {t('contact.phone')}: 
+              <a dir="ltr" href={`tel:${contact.phone}`}>{contact.phone}</a>
+            </p>
+            <p>{t('contact.location.value')}</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>{t('footer.rights')}</p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      (function () {
+        const btn = document.querySelector('.menu-toggle');
+        const nav = document.getElementById('primary-navigation');
+        if (!btn || !nav) return;
+        btn.addEventListener('click', function () {
+          const open = nav.classList.toggle('mobile-open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      })();
+    </script>
+  </body>
+</html>
+
