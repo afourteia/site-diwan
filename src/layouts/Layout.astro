@@ -17,9 +17,6 @@ const otherLangLabel = languages[otherLang];
 const currentPath = Astro.url.pathname.replace(`/${lang}`, '') || '/';
 const currentPathRelative = currentPath.replace(/^\//, '');
 // Base for client-side resolution: prefer a relative base for file://; use configured BASE_URL otherwise
-const rawBase = import.meta.env.BASE_URL ?? '';
-const baseForClient =
-  rawBase === '' || rawBase === '/' ? './' : rawBase.endsWith('/') ? rawBase : rawBase + '/';
 const pageDescription = description || t('hero.subtitle');
 ---
 <!DOCTYPE html>
@@ -28,9 +25,8 @@ const pageDescription = description || t('hero.subtitle');
     <meta charset="UTF-8" />
     <meta name="description" content={pageDescription} />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <base href={baseForClient} />
     <meta name="generator" content={Astro.generator} />
     <title>{title} - {t('hero.title')}</title>
   </head>
@@ -38,18 +34,18 @@ const pageDescription = description || t('hero.subtitle');
     <div class="site-shell">
       <header class="site-header">
         <div class="container header-grid">
-          <a class="brand-mark" href={`${lang}/`}>
-            <img src="../favicon.png" class="logo-mark" alt={t('hero.title')} />
+          <a class="brand-mark" >
+            <img src="/favicon.png" class="logo-mark" alt={t('hero.title')} />
             <div>
               <p class="brand-label">{t('hero.title')}</p>
               <!-- <p class="brand-subline">{t('home.values.title')}</p> -->
             </div>
           </a>
           <nav id="primary-navigation" class="site-nav" aria-label="Primary">
-            <a class="nav-link" href={`${lang}/`}>{t('nav.home')}</a>
-            <a class="nav-link" href={`${lang}/about`}>{t('nav.about')}</a>
-            <a class="nav-link" href={`${lang}/services`}>{t('nav.services')}</a>
-            <a class="nav-link" href={`${lang}/contact`}>{t('nav.contact')}</a>
+            <a class="nav-link" href={`/${lang}/`}>{t('nav.home')}</a>
+            <a class="nav-link" href={`/${lang}/about`}>{t('nav.about')}</a>
+            <a class="nav-link" href={`/${lang}/services`}>{t('nav.services')}</a>
+            <a class="nav-link" href={`/${lang}/contact`}>{t('nav.contact')}</a>
           </nav>
           <div class="header-actions">
             <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
@@ -59,8 +55,8 @@ const pageDescription = description || t('hero.subtitle');
                 <path d="M3 18h18"></path>
               </svg>
             </button>
-            <a class="btn btn-primary" href={`${lang}/contact`}>{t('nav.contact')}</a>
-            <a class="lang-switch" href={currentPath === '/' ? `${otherLang}/` : `${otherLang}/${currentPathRelative}`}>{otherLangLabel}</a>
+            <!-- <a class="btn btn-primary" href={`/${lang}/contact`}>{t('nav.contact')}</a> -->
+            <a class="lang-switch" href={currentPath === '/' ? `/${otherLang}/` : `/${otherLang}/${currentPathRelative}`}>{otherLangLabel}</a>
           </div>
         </div>
       </header>
@@ -84,7 +80,7 @@ const pageDescription = description || t('hero.subtitle');
             </p>
             <p>
               {t('contact.phone')}: 
-              <a href={`tel:${contact.phone}`}>{contact.phone}</a>
+              <a dir="ltr" href={`tel:${contact.phone}`}>{contact.phone}</a>
             </p>
             <p>{t('contact.location.value')}</p>
           </div>
