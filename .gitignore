@@ -24,7 +24,7 @@ vscode/
 *.swp
 *.swo
 *~
-.astro/types.d.ts
+
 
 
 
