@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://diwancash.ly/sitemap-index.xml
