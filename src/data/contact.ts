@@ -1,5 +1,5 @@
 export default {
   email: 'info@diwancash.ly',
-  phone: '+218919595353',
+  phone: '+218912160414',
   site: 'diwancash.ly',
 } as const;
