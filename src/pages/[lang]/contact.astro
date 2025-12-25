@@ -37,21 +37,24 @@ export const getStaticPaths = () =>
           <p>{t('contact.description')}</p>
         </div>
         <div>
-          {contactDetails.map((detail) => (
-            <p class="contact-detail">
-              <strong>{detail.label}:</strong>
-              {detail.href ? (
-                <a class={detail.ltr ? 'ltr-text' : ''} href={detail.href}>{detail.value}</a>
-              ) : (
-                <span>{detail.value}</span>
-              )}
-            </p>
-          ))}
+          {contactDetails.map((detail) => {
+            const detailClass = detail.ltr ? 'ltr-text' : undefined;
+            return (
+              <p class="contact-detail">
+                <strong>{detail.label}:</strong>
+                {detail.href ? (
+                  <a class={detailClass} href={detail.href}>{detail.value}</a>
+                ) : (
+                  <span class={detailClass}>{detail.value}</span>
+                )}
+              </p>
+            );
+          })}
           <p class="contact-detail">{contact.site}</p>
         </div>
         <div class="contact-actions">
           <a class="btn btn-primary" href={`mailto:${contact.email}`}>{t('contact.cta')}</a>
-          <a class="btn btn-ghost" href={`tel:${contact.phone}`}>{contact.phone}</a>
+          <a class="btn btn-ghost ltr-text" href={`tel:${contact.phone}`}>{contact.phone}</a>
         </div>
       </div>
     </div>

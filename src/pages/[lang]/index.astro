@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { languages, defaultLang, useTranslations } from '../../i18n';
 import contact from '../../data/contact';
+import heroImage from '../../assets/Currencies.jpg';
 
 type Locale = keyof typeof languages;
 const langParam = Astro.params.lang as Locale | undefined;
@@ -9,7 +10,7 @@ const lang = langParam && langParam in languages ? langParam : defaultLang;
 export const getStaticPaths = () =>
   (Object.keys(languages) as Locale[]).map((locale) => ({ params: { lang: locale } }));
 const t = useTranslations(lang);
-const heroImage = new URL('../../assets/images/Currencies.jpg', import.meta.url).href;
+const heroImageSrc = heroImage.src;
 const serviceCards = [
   { title: t('services.exchange.title'), copy: t('services.exchange.description') },
   { title: t('services.business.title'), copy: t('services.business.description') },
@@ -37,7 +38,7 @@ const trustHighlights = [
       </div>
       <div class="hero-media">
         <div class="hero-media-card">
-          <img src={heroImage} alt={t('hero.title')} loading="lazy" />
+          <img src={heroImageSrc} alt={t('hero.title')} loading="lazy" />
         </div>
         <div class="hero-highlight">{t('contact.location.value')}</div>
       </div>

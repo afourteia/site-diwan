@@ -16,7 +16,6 @@ const otherLang = lang === 'en' ? 'ar' : 'en';
 const otherLangLabel = languages[otherLang];
 const currentPath = Astro.url.pathname.replace(`/${lang}`, '') || '/';
 const pageDescription = description || t('hero.subtitle');
-const logo = new URL('../assets/logo/logo.png', import.meta.url).href;
 ---
 <!DOCTYPE html>
 <html lang={lang} dir={isRTL ? 'rtl' : 'ltr'}>
@@ -33,7 +32,7 @@ const logo = new URL('../assets/logo/logo.png', import.meta.url).href;
       <header class="site-header">
         <div class="container header-grid">
           <a class="brand-mark" href={`/${lang}/`}>
-            <img src={logo} alt={`${t('hero.title')} logo`} class="logo-mark" />
+            <div class="logo-mark" aria-hidden="true">DG</div>
             <div>
               <p class="brand-label">{t('hero.title')}</p>
               <p class="brand-subline">{t('home.values.title')}</p>
